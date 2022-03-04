@@ -29,6 +29,16 @@ function requestAPI() {
     let promise = axios.post(
         `https://api.openweathermap.org/data/2.5/weather?lat=${userLat}&lon=${userLon}&appid=f25110b0f83adb9f7c080ee182cd1d00&units=metric`);
 
-    promise.then(success => alert("Request successful!"));
+    promise.then(renderWeather);
     promise.catch(error => alert('Request failed'));
+}
+
+function renderWeather(response) {
+    data = response.data;
+
+    document.querySelector('body').innerHTML = "Cidade: " + data.name + "<br>" +
+    "Temperatura: " + data.main.temp + "<br>" + "Temperatura máxima: " + data.main.temp_max 
+    + "<br>" + "Temperatura mínima: " + data.main.temp_min;
+    
+    console.log(data);
 }
